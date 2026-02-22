@@ -1,0 +1,17 @@
+# Click the Variables button, above, to create your own variables.
+GET ${exampleVariable1} // _search
+{
+  "query": {
+    "${exampleVariable2}": {} // match_all
+  }
+}
+DELETE /products
+GET /_cat/indices/products
+GET /_cat/indices/products?v&h=index,docs.count
+
+taking backup using pgdump commands
+pg_dump -U postgres -d searchData  -Fc -f backup.dump // filesize goes from 392 in text to ? in postgress to 22 mb in backup.dump
+@@ retreving back into postgress
+createdb -U postgres searchData // or new database
+pg_restore -U postgres -d searchData -v "backup.dump"
+check size using ncdu .
