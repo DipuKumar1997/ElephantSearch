@@ -26,4 +26,7 @@ pipx install git-filter-repo
 git-filter-repo --version
 pipx ensurepath
 ~/.local/bin/git-filter-repo --version
+
+git log --all --pretty=format: --name-only | sort -u | grep "archive.zip"
 git-filter-repo --path PATH/TO/FILE --invert-paths
+git-filter-repo --path-glob "**/filename.ext" --invert-paths --force
