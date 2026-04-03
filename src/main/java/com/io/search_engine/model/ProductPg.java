@@ -1,7 +1,10 @@
-package com.io.search_engine;
+package com.io.search_engine.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
+
 @Entity
 @Table(name = "products")
 @Data

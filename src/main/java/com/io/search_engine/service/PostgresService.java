@@ -1,5 +1,8 @@
-package com.io.search_engine;
+package com.io.search_engine.service;
 
+import com.io.search_engine.projection.ProductPgProjection;
+import com.io.search_engine.repository.ProductPgRepository;
+import com.io.search_engine.wrapper.ResultWrapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -11,7 +14,7 @@ public class PostgresService {
     public PostgresService(ProductPgRepository repo) {
         this.repo = repo;
     }
-    public ResultWrapper<ProductPgProjection> fetch(int page,String query) {
+    public ResultWrapper<ProductPgProjection> fetch(int page, String query) {
         long start = System.nanoTime();
         //Page<ProductPg> result = repo.findAll( PageRequest.of(page, 10));
         Page<ProductPgProjection> result=    repo.findProductByManualQuery(PageRequest.of ( page,10 ),query);

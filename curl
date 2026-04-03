@@ -5,6 +5,9 @@ GET ${exampleVariable1} // _search
     "${exampleVariable2}": {} // match_all
   }
 }
+curl -X PUT "http://localhost:9200/products"
+curl http://localhost:9200/products/_count
+curl "http://localhost:9200/products/_search"
 DELETE /products
 GET /_cat/indices/products
 GET /_cat/indices/products?v&h=index,docs.count

@@ -1,29 +1,22 @@
 spring:
-  application:
-    name: search-engine
   mvc:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
-  elasticsearch:
-    uris: http://192.168.0.112:9200
-
+  application:
+    name: search-engine
   datasource:
     url: jdbc:postgresql://localhost:5432/searchData
     username: postgres
     password: root
     driver-class-name: org.postgresql.Driver
-
   jpa:
     hibernate:
-      ddl-auto: update   # validate | update | create | create-drop
-    show-sql: true
+      ddl-auto: update
     properties:
       hibernate:
-        format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
-
-logging:
-  level:
-    org.springframework.data.elasticsearch.client.erhlc: DEBUG
-    org.elasticsearch.client: DEBUG
+opensearch:
+  host: localhost
+  port: 9200
+  scheme: http

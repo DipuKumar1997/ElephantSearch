@@ -1,4 +1,221 @@
+##version: '3.8'
+##
+##services:
+##  opensearch-node:
+##    image: opensearchproject/opensearch:2.11.1
+##    container_name: opensearch-node
+##    environment:
+##      - discovery.type=single-node
+##      - bootstrap.memory_lock=true
+##      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=YourStrongPassword123!
+##      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+##    ulimits:
+##      memlock:
+##        soft: -1
+##        hard: -1
+##    ports:
+##      - 9200:9200
+##    networks:
+##      - opensearch-net
+##    healthcheck:
+##      test: [ "CMD-SHELL", "curl -u admin:YourStrongPassword123! http://localhost:9200/_cluster/health || exit 1" ]
+##      interval: 20s
+##      timeout: 10s
+##      retries: 10
+###  opensearch-node:
+###    image: opensearchproject/opensearch:2.11.1
+###    container_name: opensearch-node
+###    environment:
+###      - discovery.type=single-node
+###      - bootstrap.memory_lock=true
+####      - plugins.security.disabled=true
+###      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=YourStrongPassword123!
+###      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+####    environment:
+####      - discovery.type=single-node
+####      - bootstrap.memory_lock=true
+####      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=YourStrongPassword123!
+####      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+###    ulimits:
+###      memlock:
+###        soft: -1
+###        hard: -1
+###    ports:
+###      - 9200:9200
+###    networks:
+###      - opensearch-net
+###    healthcheck:
+###      test: [ "CMD-SHELL", "curl -u admin:YourStrongPassword123! http://localhost:9200/_cluster/health || exit 1" ]
+###      interval: 20s
+###      timeout: 10s
+###      retries: 10
+##
+##  opensearch-dashboards:
+##    image: opensearchproject/opensearch-dashboards:2.11.1
+##    container_name: opensearch-dashboards
+##    ports:
+##      - 5601:5601
+##    environment:
+##      OPENSEARCH_HOSTS: '["http://opensearch-node:9200"]'
+##      DISABLE_SECURITY_DASHBOARDS_PLUGIN: "true"
+##    depends_on:
+##      opensearch-node:
+##        condition: service_healthy
+##    networks:
+##      - opensearch-net
+##
+##networks:
+##  opensearch-net:
+##    driver: bridge
+#
+#version: '3.8'
+#
+#services:
+#  opensearch-node:
+#    image: opensearchproject/opensearch:2.11.1
+#    container_name: opensearch-node
+#    environment:
+#      - discovery.type=single-node
+#      - bootstrap.memory_lock=true
+#      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=YourStrongPassword123!
+#      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+#    ulimits:
+#      memlock:
+#        soft: -1
+#        hard: -1
+#    ports:
+#      - 9200:9200
+#    networks:
+#      - opensearch-net
+#
+#  opensearch-dashboards:
+#    image: opensearchproject/opensearch-dashboards:2.11.1
+#    container_name: opensearch-dashboards
+#    ports:
+#      - 5601:5601
+#    environment:
+#      OPENSEARCH_HOSTS: '["https://opensearch-node:9200"]'
+#      OPENSEARCH_USERNAME: admin
+#      OPENSEARCH_PASSWORD: YourStrongPassword123!
+#      OPENSEARCH_SSL_VERIFICATIONMODE: none
+#    depends_on:
+#      - opensearch-node
+#    networks:
+#      - opensearch-net
+#
+#networks:
+#  opensearch-net:
+#    driver: bridge
+
 version: '3.8'
+
+#services:
+#  opensearch-node:
+#    image: opensearchproject/opensearch:2.11.1
+#    container_name: opensearch-node
+#    environment:
+#      - discovery.type=single-node
+#      - plugins.security.disabled=true
+#      - compatibility.override_main_response_version=true
+#      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+#    networks:
+#      - opensearch-net
+#
+#  opensearch-dashboards:
+#    image: opensearchproject/opensearch-dashboards:2.11.1
+#    container_name: opensearch-dashboards
+#    environment:
+#      # This MUST match the container_name above exactly
+#      OPENSEARCH_HOSTS: '["http://opensearch-node:9200"]'
+#      DISABLE_SECURITY_DASHBOARDS_PLUGIN: "true"
+#    ports:
+#      - 5601:5601
+#    networks:
+#      - opensearch-net
+#networks:
+#  opensearch-net:
+#    driver: bridge
+#services:
+#  opensearch-node:
+#    image: opensearchproject/opensearch:2.11.1
+#    container_name: opensearch-node
+#    environment:
+#      - discovery.type=single-node
+#      - bootstrap.memory_lock=true
+#      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=YourStrongPassword123!
+#      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+#    ulimits:
+#      memlock:
+#        soft: -1
+#        hard: -1
+#    ports:
+#      - 9200:9200
+#    networks:
+#      - opensearch-net
+#
+#  opensearch-dashboards:
+#    image: opensearchproject/opensearch-dashboards:2.11.1
+#    container_name: opensearch-dashboards
+#    ports:
+#      - 5601:5601
+#    environment:
+#      # Use HTTPS because security is enabled by default
+#      OPENSEARCH_HOSTS: '["https://opensearch-node:9200"]'
+#      # Provide the credentials defined in the node
+#      OPENSEARCH_USERNAME: admin
+#      OPENSEARCH_PASSWORD: YourStrongPassword123!
+#      # Since we are using demo certificates, we skip verification
+#      OPENSEARCH_SSL_VERIFICATIONMODE: none
+#    depends_on:
+#      - opensearch-node
+#    networks:
+#      - opensearch-net
+
+
+#  opensearch-node:
+#    image: opensearchproject/opensearch:2.11.1
+#    environment:
+#      - discovery.type=single-node
+#      - plugins.security.disabled=true # No more SSL/Auth
+#      - compatibility.override_main_response_version=true # Stops Spring from crashing
+#      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+#    ports:
+#      - 9200:9200
+##  opensearch-node:
+##    image: opensearchproject/opensearch:2.11.1
+##    container_name: opensearch-node
+##    environment:
+##      - discovery.type=single-node
+##      - bootstrap.memory_lock=true
+##      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+##      # --- ADD THIS LINE TO DISABLE SECURITY ---
+##      - plugins.security.disabled=true
+##      - compatibility.override_main_response_version=true
+##    ulimits:
+##      memlock:
+##        soft: -1
+##        hard: -1
+##    ports:
+##      - 9200:9200
+##    networks:
+##      - opensearch-net
+#
+#  opensearch-dashboards:
+#    image: opensearchproject/opensearch-dashboards:2.11.1
+#    container_name: opensearch-dashboards
+#    ports:
+#      - 5601:5601
+#    environment:
+#      # Use HTTP now, not HTTPS
+#      OPENSEARCH_HOSTS: '["http://opensearch-node:9200"]'
+#      # Disable the security plugin in the UI as well
+#      DISABLE_SECURITY_DASHBOARDS_PLUGIN: "true"
+#    depends_on:
+#      - opensearch-node
+#    networks:
+#      - opensearch-net
+
+
 
 services:
   opensearch-node:
@@ -7,36 +224,57 @@ services:
     environment:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
-      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=YourStrongPassword123!
-      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+      - OPENSEARCH_JAVA_OPTS=-Xms256m -Xmx256m
+      - DISABLE_SECURITY_PLUGIN=true
     ulimits:
       memlock:
         soft: -1
         hard: -1
     ports:
       - 9200:9200
-    networks:
-      - opensearch-net
-    healthcheck:
-      test: ["CMD-SHELL", "curl -k -u admin:YourStrongPassword123! https://localhost:9200/_cluster/health || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+#  opensearch-node:
+#    image: opensearchproject/opensearch:2.11.1
+#    container_name: opensearch-node
+#    environment:
+#      - discovery.type=single-node
+#      - plugins.security.disabled=true
+#      - compatibility.override_main_response_version=true
+#      # --- ADD THIS LINE TO FIX THE 406 ERROR ---
+#      - "http.netty.receive_predictor_size=16kb"
+#      - "opensearch.experimental.feature.compatibility_mode.enabled=true"
+#    ports:
+#      - 9200:9200
+#    networks:
+#      - opensearch-net
+
 
   opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:2.11.1
     container_name: opensearch-dashboards
+    environment:
+      OPENSEARCH_HOSTS: '["http://opensearch-node:9200"]'
+      DISABLE_SECURITY_DASHBOARDS_PLUGIN: "true"
     ports:
       - 5601:5601
-    environment:
-      OPENSEARCH_HOSTS: '["https://opensearch-node:9200"]'
-      OPENSEARCH_USERNAME: admin
-      OPENSEARCH_PASSWORD: YourStrongPassword123!
-    depends_on:
-      - opensearch-node
     networks:
       - opensearch-net
 
 networks:
   opensearch-net:
     driver: bridge
+
+    #  opensearch-node:
+    #    image: opensearchproject/opensearch:2.11.1
+    #    container_name: opensearch-node
+    #    environment:
+    #      - discovery.type=single-node
+    #      - plugins.security.disabled=true
+    #      - compatibility.override_main_response_version=true
+    #      # --- ADD THIS LINE ---
+    #      - "opensearch.experimental.feature.compatibility_mode.enabled=true"
+    #      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+    #    ports:
+    #      - 9200:9200 # REST API
+    #      - 9600:9600 # Performance Analyzer
+    #    networks:
+    #      - opensearch-net

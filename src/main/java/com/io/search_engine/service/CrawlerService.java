@@ -1,9 +1,10 @@
-package com.io.search_engine;
+package com.io.search_engine.service;
 
+import com.io.search_engine.model.Product;
+import com.io.search_engine.service.ipml.ProductSearchRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -11,7 +12,9 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 public class CrawlerService {
-    private final ProductRepository productRepository;
+    // private final ProductRepository productRepository;
+    // private  final ProductSearchService productSearchService;
+    private  final ProductSearchRepositoryImpl productSearchRepository;
     public void crawlProductPage(String url) {
         try {
             // 1. Connect to the website
@@ -25,8 +28,9 @@ public class CrawlerService {
             product.setDescription(description);
             product.setPositiveSignals(0); // Start with neutral feedback
             product.setNegativeSignals(0);
+            productSearchRepository.save ( product );
             // 4. Save directly to OpenSearch/Elasticsearch
-            productRepository.save(product);
+            //productSearchService.save(product);
         } catch (IOException e) {
             System.err.println("Error crawling " + url + ": " + e.getMessage());
         }

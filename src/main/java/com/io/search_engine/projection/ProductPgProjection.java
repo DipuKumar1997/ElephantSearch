@@ -1,7 +1,5 @@
-package com.io.search_engine;
+package com.io.search_engine.projection;
 
-//public class ProductPgProjection {
-//}
 public interface ProductPgProjection {
     Long getId();
     String getTitle();

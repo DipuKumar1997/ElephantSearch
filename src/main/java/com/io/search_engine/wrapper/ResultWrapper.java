@@ -1,8 +1,7 @@
-package com.io.search_engine;
+package com.io.search_engine.wrapper;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
 import java.util.List;
 
 @Data

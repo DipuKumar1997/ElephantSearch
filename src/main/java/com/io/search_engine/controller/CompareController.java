@@ -1,13 +1,16 @@
-package com.io.search_engine;
+package com.io.search_engine.controller;
 
+import com.io.search_engine.service.PostgresService;
+import com.io.search_engine.projection.ProductPgProjection;
+import com.io.search_engine.wrapper.ResultWrapper;
+import com.io.search_engine.model.Product;
+import com.io.search_engine.service.ElasticService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/api/compare")
