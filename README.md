@@ -28,6 +28,10 @@ NOTE:  i notice one thing that when i seed the database with the 5000 records po
 while same with the elasticseach it work faster and you start notice changes when it have 400k records it use the inverted index . so also in this project i use the standard analyzer
 you can add any custom analyzer but you must should add in Product.java also  
 
+## Demo
+
+[![Demo Video](docs/demo.png)](https://drive.google.com/file/d/16C-YfqfrkGur2M9-Ch8KC4nc2O7QCJUb/view?usp=drive_link)
+
 ### Purpose
 
 This project is intended for learning and performance comparison between database search and search engine indexing.
