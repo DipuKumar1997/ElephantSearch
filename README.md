@@ -17,10 +17,6 @@ The UI displays Postgres results on one side and Elasticsearch results on the ot
 ### 
 * GET /api/search?query=shoes
 
-Example Request
-
-* /api/search?q=laptop
-
 
 ### Frontend
 * jsp page on index.jsp see under the src/main/webapp/WEB-INF/views/index.jsp
