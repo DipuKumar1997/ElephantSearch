@@ -1,5 +1,3 @@
-
-
 package com.io.search_engine.service;
 
 import com.io.search_engine.model.Product;
@@ -7,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.opensearch.client.opensearch.OpenSearchClient;
 import org.opensearch.client.opensearch.core.SearchResponse;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +16,7 @@ public class ProductSearchService {
     public boolean updateFeedback(String id, String type) {
 
     try {
-        // 1. Get existing product
+        //  Get existing product
         var response = client.get(g -> g
                         .index("products")
                         .id(id),
@@ -51,7 +48,8 @@ public class ProductSearchService {
         throw new RuntimeException("Feedback update failed", e);
     }
 }
-    // 🔍 Basic search (with relevance)
+    //  Basic search (with relevance) without asking for the relevance score from user its come from the opensearch right now 
+    // when we make it live we will connect it with the direct live server with some filter 
     public List<Product> searchWithFeedback(String userInput) {
 
         try {
@@ -81,7 +79,7 @@ public class ProductSearchService {
         }
     }
 
-    // ⚡ Optimized search (pagination + limited fields)
+    //  Optimized search (pagination <- limited fields)
     public List<Product> searchWithFeedbackFaster(String userInput) {
 
         try {
